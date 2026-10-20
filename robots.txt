@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://igorwrd.github.io/page-multigraf/sitemap.xml

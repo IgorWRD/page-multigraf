@@ -15,6 +15,7 @@
   --bg-alt: #FFFFFF;
   --paper: #0A3622;              /* głęboki szmaragd jako kolor tekstu */
   --muted: #5F6F66;
+  --line: rgba(10, 54, 34, 0.16); /* linia ramek i separatorów */
   --overlay: rgba(6, 40, 24, 0.68);
   --accent: #D4AF37;             /* matowe złoto — przyciski CTA */
   --accent-contrast: #221A05;
@@ -32,6 +33,7 @@
   --bg-alt: #1E2440;             /* ciemniejszy odcień dla sekcji alternatywnych */
   --paper: #FAF3E6;              /* kremowy tekst */
   --muted: #8E97C8;              /* stonowany tekst pomocniczy */
+  --line: rgba(250, 243, 230, 0.22);
   --overlay: rgba(24, 30, 56, 0.62);   /* nakładka na zdjęcia w banerze */
   --accent: #A163F7;             /* akcent 1 — fioletowy (CTA, logo) */
   --accent-contrast: #FFFFFF;    /* tekst na kolorze akcentowym */
@@ -49,6 +51,7 @@
   --bg-alt: #FFFFFF;
   --paper: #0A192F;              /* głęboki nocny błękit — tytuły i tekst */
   --muted: #5B6E8F;
+  --line: rgba(10, 25, 47, 0.16);
   --overlay: rgba(10, 25, 47, 0.66);
   --accent: #FF6B35;             /* koralowy pomarańcz — przyciski CTA */
   --accent-contrast: #FFFFFF;
@@ -66,6 +69,7 @@
   --bg-alt: #F1F5F9;
   --paper: #1E293B;              /* grafitowa czerń tekstu */
   --muted: #64748B;
+  --line: rgba(30, 41, 59, 0.16);
   --overlay: rgba(15, 23, 42, 0.66);
   --accent: #10B981;             /* neonowa zieleń (ciemniejszy wariant) */
   --accent-contrast: #FFFFFF;
@@ -83,6 +87,7 @@
   --bg-alt: #131C31;
   --paper: #F1F5F9;
   --muted: #8FA0BD;
+  --line: rgba(241, 245, 249, 0.22);
   --overlay: rgba(9, 14, 31, 0.62);
   --accent: #E2B659;             /* matowe złoto — CTA */
   --accent-contrast: #141005;
@@ -100,6 +105,7 @@
   --bg-alt: #FFFFFF;
   --paper: #16233A;              /* granatowy indygo dla tekstów */
   --muted: #61708F;
+  --line: rgba(22, 35, 58, 0.16);
   --overlay: rgba(15, 28, 56, 0.66);
   --accent: #E5A93C;             /* bursztynowe złoto — przyciski CTA */
   --accent-contrast: #231703;
@@ -117,6 +123,7 @@
   --bg-alt: #F6F7FB;
   --paper: #212529;              /* grafitowa czerń */
   --muted: #6C757D;
+  --line: rgba(33, 37, 41, 0.16);
   --overlay: rgba(24, 27, 32, 0.64);
   --accent: #FF5A36;             /* koralowo-pomarańczowy — CTA */
   --accent-contrast: #FFFFFF;
@@ -134,6 +141,7 @@
   --bg-alt: #111A2B;
   --paper: #E2E8F0;              /* srebrzysto-stalowy tekst */
   --muted: #8B95A9;
+  --line: rgba(226, 232, 240, 0.22);
   --overlay: rgba(3, 6, 14, 0.62);
   --accent: #00F5D4;             /* neonowa turkus — ślad lasera — CTA */
   --accent-contrast: #06251E;
@@ -184,6 +192,14 @@ img { display: block; max-width: 100%; height: auto; }
 
 /* ---------- Typografia ---------- */
 h1, h2, h3, em { font-family: var(--serif); }
+
+/* Gradientowy akcent tekstu (accent → accent-3) — wspólna klasa */
+.tekst-gradient {
+  background: linear-gradient(100deg, var(--accent) 20%, var(--accent-3) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .section__title,
 .hero__title {
@@ -275,16 +291,7 @@ h1, h2, h3, em { font-family: var(--serif); }
   text-decoration: none;
   letter-spacing: 0.02em;
 }
-.logo__mark { color: var(--accent); }
-.logo__tag {
-  margin-left: 10px;
-  font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+
 .logo__img {
   display: block;
   height: 46px;
@@ -308,8 +315,6 @@ h1, h2, h3, em { font-family: var(--serif); }
   transition: color 0.25s, opacity 0.25s;
 }
 .nav__link:hover { color: var(--accent); opacity: 1; }
-
-.nav__cta { padding: 12px 24px; }
 
 /* ---------- Pozioma prawa krawędź: pionowy przycisk CTA ---------- */
 /* Wysuwany wzdłuż prawej krawędzi przycisk «Wyceń zamówienie».
@@ -476,14 +481,8 @@ h1, h2, h3, em { font-family: var(--serif); }
   margin-bottom: 28px;
   color: var(--hero-ink);
 }
-/* Kursywny akcent z gradientem akcentu 1 → akcent 3 */
-.hero__title em {
-  font-style: italic;
-  background: linear-gradient(100deg, var(--accent) 20%, var(--accent-3) 85%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+/* Kursywny akcent w nagłówku banera */
+.hero__title em { font-style: italic; }
 
 .hero__lead {
   font-size: clamp(16px, 2vw, 19px);
@@ -538,50 +537,9 @@ h1, h2, h3, em { font-family: var(--serif); }
 .section--alt { background: var(--bg-alt); }
 
 .section__head { max-width: 640px; margin-bottom: 64px; }
-.section__head--center {
-  margin-inline: auto;
-  text-align: center;
-}
 .section__title { font-size: clamp(30px, 4vw, 44px); }
 
-.section__lead {
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 15px;
-}
-
 /* ---------- Oferta ---------- */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.card {
-  position: relative;
-  padding: 48px 40px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: transparent;
-  transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
-}
-.card:hover {
-  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px var(--shadow);
-}
-
-.card__num {
-  position: absolute;
-  top: 32px;
-  right: 36px;
-  font-family: var(--serif);
-  font-size: 44px;
-  font-weight: 500;
-  color: color-mix(in srgb, var(--accent) 30%, transparent);
-  line-height: 1;
-}
-
 .card__title {
   font-size: 24px;
   font-weight: 600;
@@ -592,15 +550,6 @@ h1, h2, h3, em { font-family: var(--serif); }
   font-size: 15px;
   color: color-mix(in srgb, var(--paper) 80%, transparent);
   margin-bottom: 28px;
-}
-
-.card__foot {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-3);
 }
 
 /* ---------- Karty oferty ze zdjęciami (jak na multigraf.com.pl) ---------- */
@@ -664,74 +613,6 @@ h1, h2, h3, em { font-family: var(--serif); }
   gap: 24px;
 }
 
-.work {
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-}
-.work img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  transition: transform 0.6s ease, filter 0.6s ease;
-  filter: grayscale(35%);
-}
-.work:hover img { transform: scale(1.05); filter: grayscale(0); }
-
-.work figcaption {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 48px 24px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--hero-ink);
-  background: linear-gradient(transparent, color-mix(in srgb, #10131F 85%, transparent));
-}
-
-.tag {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--tag);
-}
-
-/* ---------- Dlaczego my ---------- */
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.fact {
-  padding: 40px 28px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  transition: border-color 0.35s;
-}
-.fact:hover { border-color: color-mix(in srgb, var(--accent-2) 55%, transparent); }
-.fact strong {
-  display: block;
-  font-family: var(--serif);
-  font-size: 34px;
-  font-weight: 600;
-  color: var(--accent-3);
-  margin-bottom: 12px;
-}
-.fact span { font-size: 14px; color: color-mix(in srgb, var(--paper) 75%, transparent); }
-
-.trust-note {
-  margin-top: 48px;
-  padding: 28px 32px;
-  border-left: 2px solid var(--tag);
-  background: var(--bg-alt);
-  font-size: 15px;
-  color: color-mix(in srgb, var(--paper) 80%, transparent);
-  max-width: 760px;
-}
-
 /* ---------- Wsparcie (PFR) ---------- */
 .support {
   display: grid;
@@ -765,33 +646,6 @@ h1, h2, h3, em { font-family: var(--serif); }
 }
 
 .about__text p { margin-bottom: 20px; font-size: 15.5px; color: color-mix(in srgb, var(--paper) 85%, transparent); }
-
-.about__quote {
-  display: block;
-  font-size: 26px;
-  font-style: italic;
-  color: var(--accent);
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-.about__list {
-  margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.about__list li {
-  padding: 12px 0 12px 32px;
-  border-bottom: 1px solid var(--line);
-  font-size: 15px;
-  position: relative;
-}
-.about__list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--accent-2);
-}
 
 .about__media {
   position: relative;
@@ -1004,13 +858,7 @@ h1, h2, h3, em { font-family: var(--serif); }
   font-size: clamp(34px, 4.5vw, 54px);
   margin-bottom: 16px;
 }
-.calc-head__title em {
-  font-style: italic;
-  background: linear-gradient(100deg, var(--accent) 20%, var(--accent-3) 85%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+.calc-head__title em { font-style: italic; }
 .calc-head__lead {
   max-width: 620px;
   margin-inline: auto;
@@ -1114,54 +962,6 @@ h1, h2, h3, em { font-family: var(--serif); }
 }
 .input option { background: var(--bg-alt); color: var(--paper); }
 
-/* Karty wyboru (produkt / format) */
-.opt-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-.opt-grid--small { grid-template-columns: repeat(3, 1fr); }
-.opt {
-  padding: 16px 12px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--paper);
-  background: color-mix(in srgb, var(--muted) 8%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  cursor: pointer;
-  transition: border-color 0.25s, background 0.25s, transform 0.25s;
-}
-.opt:hover { border-color: color-mix(in srgb, var(--accent-2) 60%, transparent); transform: translateY(-2px); }
-.opt--active {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-  box-shadow: inset 0 0 0 1px var(--accent);
-}
-.opt--small { padding: 10px 8px; font-size: 13px; }
-.opt__name { display: inline-block; }
-
-/* Presety nakładu */
-.presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.preset {
-  padding: 6px 14px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--muted);
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-}
-.preset:hover { color: var(--accent-2); border-color: var(--accent-2); }
-.preset--active {
-  color: var(--accent-contrast);
-  background: var(--accent-2);
-  border-color: var(--accent-2);
-}
-
 /* Suwak gramatury */
 .range {
   width: 100%;
@@ -1191,27 +991,6 @@ h1, h2, h3, em { font-family: var(--serif); }
 }
 
 .hint { margin-top: 8px; font-size: 13px; color: var(--muted); }
-
-/* Pills zadruku */
-.opt-inline { display: flex; flex-wrap: wrap; gap: 10px; }
-.radio-pill { cursor: pointer; }
-.radio-pill input { display: none; }
-.radio-pill span {
-  display: inline-block;
-  padding: 9px 18px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--paper);
-  background: color-mix(in srgb, var(--muted) 8%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  transition: all 0.25s;
-}
-.radio-pill input:checked + span {
-  color: var(--accent-contrast);
-  background: var(--accent-2);
-  border-color: var(--accent-2);
-}
 
 /* Chips uszlachetnienia */
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -1328,10 +1107,6 @@ textarea.input {
 .summary__gross strong {
   font-size: 26px;
   font-weight: 600;
-  background: linear-gradient(100deg, var(--accent), var(--accent-3));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 .summary__unit { margin-top: 6px; font-size: 12.5px; color: var(--muted); text-align: right; }
 
@@ -1474,7 +1249,6 @@ textarea.input {
      dopóki panel poza ekranem, cenę pokazuje mini-bar */
   .summary { position: static; }
   body.page-calc { padding-bottom: 88px; }   /* miejsce na mini-bar */
-  .opt-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 1024px) {
   .minibar { display: none; }
@@ -1486,8 +1260,6 @@ textarea.input {
   .step { padding: 28px 20px 32px; }
 
   .field-2col { grid-template-columns: 1fr; }
-  .opt-grid,
-  .opt-grid--small { grid-template-columns: 1fr 1fr; }
   .calc-grid { gap: 24px; }
 }
 
@@ -1495,9 +1267,7 @@ textarea.input {
    9. RESPONSIVE (strona główna)
    ============================================================ */
 @media (max-width: 1023px) {
-  .cards { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr 1fr; }
-  .grid-4 { grid-template-columns: 1fr 1fr; }
   .about, .contact { grid-template-columns: 1fr; }
   .about__media { order: -1; }
   .hero { background-attachment: scroll; }
@@ -1528,7 +1298,6 @@ textarea.input {
     visibility: visible;
   }
   .nav__link { padding: 10px 0; font-size: 15px; }
-  .nav__cta { margin-top: 16px; }
 
   .burger { display: flex; }
 
@@ -1551,14 +1320,9 @@ textarea.input {
 
   .hero__stats { gap: 24px; }
 
-  .cards,
-  .grid-3,
-  .grid-4 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
 
   .form__row { grid-template-columns: 1fr; }
-
-  .card { padding: 36px 28px; }
-  .card__num { top: 28px; right: 28px; font-size: 36px; }
 
   .about__media::after { display: none; }
 }
@@ -1596,5 +1360,5 @@ textarea.input {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .work img { transition: none; }
+  .offer-card img { transition: none; }
 }

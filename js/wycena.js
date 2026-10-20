@@ -132,6 +132,8 @@
   const zl = (v) => new Intl.NumberFormat('pl-PL',
     { style: 'currency', currency: 'PLN', minimumFractionDigits: 2 }).format(v);
   const liczba = (v) => new Intl.NumberFormat('pl-PL').format(v);
+  /* Waga przesyłki — jedno formatowanie używane w panelu i w liście mail */
+  const kg = (v) => new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 1 }).format(v) + ' kg';
 
   const state = { produkt: 'ulotki', papier: 'kreda', arkusz: 'B1+' };
   const isKatalog = () => state.produkt === 'katalogi';
@@ -287,8 +289,7 @@
     $('#sw-wysylka').textContent = tekstWysylki(r.termin.dniRobocze);
     $('#sw-dostawa').textContent = r.dost.nazwa;
     /* [A4] Waga przesyłki */
-    $('#sw-waga').textContent = '≈ ' +
-      new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 1 }).format(r.wagaKg) + ' kg';
+    $('#sw-waga').textContent = '≈ ' + kg(r.wagaKg);
 
     /* [B8] Rozbicie ceny: część produkcyjna × mnożnik terminu */
     $('#sb-przygotowanie').textContent = zl(r.przygotowanie * r.mnoz);
@@ -312,10 +313,15 @@
         zl(w.netto) + '</td><td>' + zl(w.unit) + '</td></tr>';
     }).join('');
 
-    /* [B12] Kwoty dostawy odświeżone wagą przesyłki w liście wyboru */
-    $('#in-dostawa').options[1].textContent = 'Kurier DPD — ' + zl(
-      CONFIG.dostawa.kurier.baza + CONFIG.dostawa.kurier.zaKg * r.wagaKg);
-    $('#in-dostawa').options[2].textContent = 'Paczkomat InPost — 15 zł (do 25 kg)';
+    /* [B12] Kwoty dostawy odświeżone wagą przesyłki w liście wyboru
+       (poszukiwanie po value — kolejność w HTML jest obojętna) */
+    const dostawaSel = $('#in-dostawa');
+    const kurier = CONFIG.dostawa.kurier;
+    dostawaSel.querySelector('option[value="kurier"]').textContent =
+      kurier.nazwa + ' — ' + zl(kurier.baza + kurier.zaKg * r.wagaKg) + ' (' + kg(r.wagaKg) + ')';
+    const inpost = CONFIG.dostawa.inpost;
+    dostawaSel.querySelector('option[value="inpost"]').textContent =
+      inpost.nazwa + ' — ' + zl(inpost.koszt) + ' (do ' + liczba(inpost.limitKg) + ' kg)';
 
     /* [A1] Mini-bar na mobile */
     $('#minibar-netto').textContent  = zl(r.netto);
@@ -371,8 +377,7 @@
       'USZLACHETNIENIE: ' + (r.uszNazwy.length ? r.uszNazwy.join(', ') : 'brak'),
       'TERMIN:          ' + r.termin.nazwa + ', wysyłka ' + tekstWysylki(r.termin.dniRobocze),
       'DOSTAWA:         ' + r.dost.nazwa + ' — ' + zl(r.kosztDostawy),
-      'WAGA PRZESYŁKI:  ≈ ' +
-        new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 1 }).format(r.wagaKg) + ' kg', '',
+      'WAGA PRZESYŁKI:  ≈ ' + kg(r.wagaKg), '',
       'WYCENA (orientacyjna, netto):',
       '  przygotowanie:   ' + zl(r.przygotowanie * r.mnoz),
       r.pantoneKoszt > 0 ? '  formy Pantone:   ' + zl(r.pantoneKoszt * r.mnoz) : null,

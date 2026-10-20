@@ -6,6 +6,16 @@
   <title>MultiGraf – Drukarnia offsetowa w Krakowie | Druk offsetowy, cyfrowy, wielkoformatowy</title>
   <meta name="description" content="Drukarnia offsetowa Multigraf z Krakowa – od 1995 roku. Druk offsetowy do formatu B1+, druk cyfrowy, naświetlanie CTP, DTP, introligatornia i uszlachetnianie druków." />
   <link rel="icon" href="img/favicon.png" />
+  <!-- Baner hero: wcześniejsze pobranie zdjęcia (LCP) -->
+  <link rel="preload" as="image" href="img/maszyna-offset-man-roland-700.jpg" />
+  <!-- Open Graph / Twitter — podgląd przy udostępnianiu w mediach społecznościowych -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MultiGraf" />
+  <meta property="og:title" content="MultiGraf – Drukarnia offsetowa w Krakowie" />
+  <meta property="og:description" content="Druk offsetowy do formatu B1+, druk cyfrowy, naświetlanie CTP, DTP, introligatornia i uszlachetnianie druków." />
+  <meta property="og:url" content="https://igorwrd.github.io/page-multigraf/" />
+  <meta property="og:image" content="https://igorwrd.github.io/page-multigraf/img/multigraf-home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Motyw zapisany w localStorage — przywróceny przed stylami, żeby nie było mignięcia -->
   <script>
@@ -14,10 +24,8 @@
     } catch (blad) { /* brak localStorage — zostaje motyw domyślny »prem-min» */ }
   </script>
 
-  <!-- Czcionki: Playfair Display (nagłówki) + Inter (treść) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <!-- Czcionki własne, bez zewnętrznych domen (RODO): Playfair Display + Inter -->
+  <link rel="stylesheet" href="css/fonts.css" />
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -80,7 +88,7 @@
       <div class="container">
         <div class="hero__content">
           <span class="hero__eyebrow reveal">Drukarnia &middot; Kraków, ul. Bagrowa 9</span>
-          <h1 class="hero__title reveal">Drukarnia offsetowa<br /><em>od 1995 roku</em></h1>
+          <h1 class="hero__title reveal">Drukarnia offsetowa<br /><em class="tekst-gradient">od 1995 roku</em></h1>
           <p class="hero__lead reveal">
             Druk offsetowy do formatu B1+, druk cyfrowy, naświetlanie CTP, przygotowalnia DTP,
             introligatornia i uszlachetnianie — wszystko pod jednym dachem.
@@ -299,9 +307,9 @@
   <!-- ==================== STOPKA (footer) ==================== -->
   <footer class="footer">
     <div class="container footer__inner">
-      <div class="footer__logo">
+      <a href="#home" class="footer__logo">
         <span>M</span>ulti<span>G</span>raf<span class="footer__logo-dot">.com.pl</span>
-      </div>
+      </a>
       <nav class="footer__nav" aria-label="Nawigacja w stopce">
         <a href="#home">Home</a>
         <a href="#onas">O nas</a>

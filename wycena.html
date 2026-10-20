@@ -6,6 +6,14 @@
   <title>Kalkulator wyceny druku | MultiGraf – Drukarnia offsetowa w Krakowie</title>
   <meta name="description" content="Kalkulator wyceny druku MultiGraf — ulotki, plakaty do formatu B1+, opakowania, naklejki i katalogi. Cena orientacyjna w kilka sekund, wysyłka do działu sprzedaży." />
   <link rel="icon" href="img/favicon.png" />
+  <!-- Open Graph / Twitter — podgląd przy udostępnianiu w mediach społecznościowych -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MultiGraf" />
+  <meta property="og:title" content="Kalkulator wyceny druku | MultiGraf" />
+  <meta property="og:description" content="Ulotki, plakaty do formatu B1+, opakowania, naklejki i katalogi. Cena orientacyjna w kilka sekund, wysyłka do działu sprzedaży." />
+  <meta property="og:url" content="https://igorwrd.github.io/page-multigraf/wycena.html" />
+  <meta property="og:image" content="https://igorwrd.github.io/page-multigraf/img/multigraf-home.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Motyw zapisany w localStorage — przywróceny przed stylami, żeby nie było mignięcia -->
   <script>
@@ -14,10 +22,8 @@
     } catch (blad) { /* brak localStorage — zostaje motyw domyślny »prem-min» */ }
   </script>
 
-  <!-- Czcionki: Playfair Display (nagłówki) + Inter (treść) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <!-- Czcionki własne, bez zewnętrznych domen (RODO): Playfair Display + Inter -->
+  <link rel="stylesheet" href="css/fonts.css" />
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -74,7 +80,7 @@
     <section class="calc-head">
       <div class="container">
         <p class="crumbs"><a href="index.html">Strona główna</a> &rsaquo; <span>Wycena druku</span></p>
-        <h1 class="calc-head__title">Kalkulator <em>wyceny</em> druku</h1>
+        <h1 class="calc-head__title">Kalkulator <em class="tekst-gradient">wyceny</em> druku</h1>
         <p class="calc-head__lead">
           Wybierz produkt, parametry i wykończenie — cena przeliczy się sama.
           Wycena jest orientacyjna: ostateczną cenę potwierdzi dział sprzedaży.
@@ -323,7 +329,7 @@
             <span>Netto</span><strong id="sum-netto">0 zł</strong>
           </div>
           <div class="summary__gross">
-            <span>Brutto (VAT 23%)</span><strong id="sum-brutto">0 zł</strong>
+            <span>Brutto (VAT 23%)</span><strong id="sum-brutto" class="tekst-gradient">0 zł</strong>
           </div>
           <p class="summary__unit">≈ <output id="sum-unit">0,00 zł</output> netto za arkusz</p>
         </div>
