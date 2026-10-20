@@ -58,7 +58,7 @@
      silniki nie przeliczają wtedy stanów przechwyconych
      przez transition na właściwościach z var(). */
   function zastosuj(id) {
-    if (!PALETY[id]) id = 'fairy';
+    if (!PALETY[id]) id = 'prem-min';
     var korpus = document.body;
     document.documentElement.setAttribute('data-theme', id);
     zapisz(id);
@@ -110,7 +110,7 @@
       panel.appendChild(element);
     });
 
-    odswiezPanel(document.documentElement.getAttribute('data-theme') || 'fairy');
+    odswiezPanel(document.documentElement.getAttribute('data-theme') || 'prem-min');
   }
 
   /* Otwieranie / zamykanie panelu */

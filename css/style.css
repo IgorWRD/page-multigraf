@@ -2,30 +2,14 @@
    MultiGraf — premium minimalism
    System motywów kolorystycznych: 8 palet przełączanych
    bezpośrednio na stronie (data-theme na elemencie <html>).
-   Motyw domyślny: «fairy». Motyw zapisywany w localStorage.
+   Motyw domyślny: «prem-min» / Klasyczny minimalizm. Motyw zapisywany w localStorage.
    ============================================================ */
 
 /* ============================================================
    1. TOKENY KOLORÓW — definicje motywów
    ============================================================ */
+/* --- Klasyczny minimalizm (domyślny): biel + szmaragd / matowe złoto --- */
 :root,
-:root[data-theme="fairy"] {
-  --bg: #252C49;                 /* ciemnoniebieskie tło palety Fairy */
-  --bg-alt: #1E2440;             /* ciemniejszy odcień dla sekcji alternatywnych */
-  --paper: #FAF3E6;              /* kremowy tekst */
-  --muted: #8E97C8;              /* stonowany tekst pomocniczy */
-  --overlay: rgba(24, 30, 56, 0.62);   /* nakładka na zdjęcia w banerze */
-  --accent: #A163F7;             /* akcent 1 — fioletowy (CTA, logo) */
-  --accent-contrast: #FFFFFF;    /* tekst na kolorze akcentowym */
-  --accent-2: #6F88FC;           /* akcent 2 — błękitny (odnośniki, śródtytuły) */
-  --accent-3: #45E3FF;           /* akcent 3 — turkus (detale, liczby) */
-  --tag: #FF7582;                /* koralowy — tagi, błędy formularza */
-  --shadow: rgba(10, 15, 35, 0.45);    /* barwa cieni */
-  --hero-ink: #FAF3E6;           /* tekst na zdjęciu banera */
-  --hero-ink-soft: rgba(250, 243, 230, 0.82);
-}
-
-/* --- Klasyczny minimalizm: biel + szmaragd / matowe złoto --- */
 :root[data-theme="prem-min"] {
   --bg: #F8F9FA;
   --bg-alt: #FFFFFF;
@@ -40,6 +24,23 @@
   --shadow: rgba(10, 54, 34, 0.12);
   --hero-ink: #FFFFFF;
   --hero-ink-soft: rgba(255, 255, 255, 0.85);
+}
+
+/* --- Fairy: granat + fiolet / błękit / turkus --- */
+:root[data-theme="fairy"] {
+  --bg: #252C49;                 /* ciemnoniebieskie tło palety Fairy */
+  --bg-alt: #1E2440;             /* ciemniejszy odcień dla sekcji alternatywnych */
+  --paper: #FAF3E6;              /* kremowy tekst */
+  --muted: #8E97C8;              /* stonowany tekst pomocniczy */
+  --overlay: rgba(24, 30, 56, 0.62);   /* nakładka na zdjęcia w banerze */
+  --accent: #A163F7;             /* akcent 1 — fioletowy (CTA, logo) */
+  --accent-contrast: #FFFFFF;    /* tekst na kolorze akcentowym */
+  --accent-2: #6F88FC;           /* akcent 2 — błękitny (odnośniki, śródtytuły) */
+  --accent-3: #45E3FF;           /* akcent 3 — turkus (detale, liczby) */
+  --tag: #FF7582;                /* koralowy — tagi, błędy formularza */
+  --shadow: rgba(10, 15, 35, 0.45);    /* barwa cieni */
+  --hero-ink: #FAF3E6;           /* tekst na zdjęciu banera */
+  --hero-ink-soft: rgba(250, 243, 230, 0.82);
 }
 
 /* --- Korporacyjny niebieski: perła + nocny błękit + koral --- */
