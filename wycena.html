@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator wyceny druku | MultiGraf – Drukarnia offsetowa w Krakowie</title>
+  <meta name="description" content="Kalkulator wyceny druku MultiGraf — ulotki, plakaty do formatu B1+, opakowania, naklejki i katalogi. Cena orientacyjna w kilka sekund, wysyłka do działu sprzedaży." />
+  <link rel="icon" href="img/favicon.png" />
+
+  <!-- Motyw zapisany w localStorage — przywróceny przed stylami, żeby nie było mignięcia -->
+  <script>
+    try {
+      document.documentElement.setAttribute('data-theme', window.localStorage.getItem('multigraf-motyw') || 'fairy');
+    } catch (blad) { /* brak localStorage — zostaje motyw domyślny »fairy» */ }
+  </script>
+
+  <!-- Czcionki: Playfair Display (nagłówki) + Inter (treść) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="page-calc">
+
+  <!-- ==================== NAGŁÓWEK (header) ==================== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html#home" class="logo" aria-label="MultiGraf – strona główna">
+        <img src="img/logo-multigraf.png" alt="MultiGraf – logo" class="logo__img" />
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Nawigacja główna">
+        <div class="nav__item">
+          <a href="index.html#home" class="nav__link">Home</a>
+        </div>
+        <div class="nav__item">
+          <a href="index.html#onas" class="nav__link">O nas</a>
+        </div>
+        <div class="nav__item">
+          <a href="index.html#oferta" class="nav__link">Oferta</a>
+        </div>
+        <div class="nav__item">
+          <a href="index.html#wsparcie" class="nav__link">Wsparcie</a>
+        </div>
+        <div class="nav__item">
+          <a href="index.html#kariera" class="nav__link">Kariera</a>
+        </div>
+        <div class="nav__item">
+          <a href="index.html#kontakt" class="nav__link">Kontakt</a>
+        </div>
+      </nav>
+
+      <!-- Przełącznik motywów kolorystycznych -->
+      <div class="theme-wrap">
+        <button id="motyw-przycisk" class="theme-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Wybierz motyw kolorystyczny">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.25" />
+            <path d="M12 2.75v18.5" />
+            <path d="M12 2.75c-3.5 2.6-3.5 6.5 0 9.25s3.5 6.65 0 9.25" />
+          </svg>
+        </button>
+        <div id="motyw-panel" class="theme-panel" role="menu" aria-label="Lista motywów" hidden></div>
+      </div>
+
+      <button class="burger" id="burger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="calc">
+    <!-- ==================== NAGŁÓWEK STRONY ==================== -->
+    <section class="calc-head">
+      <div class="container">
+        <p class="crumbs"><a href="index.html">Strona główna</a> &rsaquo; <span>Wycena druku</span></p>
+        <h1 class="calc-head__title">Kalkulator <em>wyceny</em> druku</h1>
+        <p class="calc-head__lead">
+          Wybierz produkt, parametry i wykończenie — cena przeliczy się sama.
+          Wycena jest orientacyjna: ostateczną cenę potwierdzi dział sprzedaży.
+        </p>
+      </div>
+    </section>
+
+    <div class="container calc-grid">
+      <!-- ==================== FORMULARZ KALKULACJI ==================== -->
+      <form id="calc-form" novalidate>
+
+        <!-- KROK 1: produkt i wszystkie parametry druku (jeden blok) -->
+        <section class="step" id="step-produkt">
+          <header class="step__head">
+            <span class="step__num">1</span>
+            <h2 class="step__title">Co drukujemy?</h2>
+          </header>
+
+          <!-- Produkcja i nakład (arkusze) -->
+          <div class="field-2col">
+            <div class="field-group">
+              <label class="field-group__label" for="in-produkt">Produkcja</label>
+              <select id="in-produkt" class="input">
+                <option value="ulotki" selected>Ulotki</option>
+                <option value="plakaty">Plakaty</option>
+                <option value="opakowania">Opakowania</option>
+                <option value="naklejki">Naklejki (folia)</option>
+                <option value="katalogi">Katalogi / książki</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-naklad">Nakład (arkusze)</label>
+              <input type="number" id="in-naklad" class="input" min="1" step="1" value="500" inputmode="numeric" />
+            </div>
+          </div>
+
+          <!-- Zadruk i kolory dodatkowe -->
+          <div class="field-group field-2col">
+            <div class="field-group">
+              <label class="field-group__label" for="in-zadruk">Zadruk</label>
+              <select id="in-zadruk" class="input">
+                <option value="4+4" selected>4+4 — pełny kolor po obu stronach arkusza</option>
+                <option value="4+0">4+0 — pełny kolor jednostronnie</option>
+                <option value="1+1">1+1 — czarno-biały dwustronnie</option>
+                <option value="1+0">1+0 — czarno-biały jednostronnie</option>
+              </select>
+              <p class="hint">4+4 = CMYK na obu stronach arkusza.</p>
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-pantone">Kolory dodatkowe (Pantone)</label>
+              <select id="in-pantone" class="input">
+                <option value="0" selected>Bez dodatkowych kolorów</option>
+                <option value="1">1 kolor dodatkowy</option>
+                <option value="2">2 kolory dodatkowe</option>
+                <option value="3">3 kolory dodatkowe</option>
+                <option value="4">4 kolory dodatkowe</option>
+              </select>
+              <p class="hint">Dodatkowy kolor = osobne przejście maszyny + forma CTP (1030×785).</p>
+            </div>
+          </div>
+
+          <!-- Format arkusza i rodzaj papieru -->
+          <div class="field-group field-2col">
+            <div class="field-group">
+              <label class="field-group__label" for="in-arkusz">Format papieru</label>
+              <select id="in-arkusz" class="input">
+                <option value="A1">A1 — 594×841 mm</option>
+                <option value="A1+">A1+ — 610×860 mm</option>
+                <option value="B1">B1 — 700×1000 mm</option>
+                <option value="B1+" selected>B1+ — 720×1020 mm</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-papier">Rodzaj papieru</label>
+              <select id="in-papier" class="input">
+                <option value="kreda" selected>Papier kredowy powlekany</option>
+                <option value="niepowlekany">Papier niepowlekany</option>
+                <option value="karton">Karton</option>
+                <option value="niewsiakliwy">Podłoże niewsiąkliwe (folia)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Gramatura — na pełną szerokość -->
+          <div class="field-group">
+            <label class="field-group__label">Gramatura: <output id="gramatura-val">115 g/m²</output></label>
+            <input type="range" id="in-gramatura" class="range" min="0" max="8" step="1" value="2" />
+            <p class="hint" id="gramatura-hint"></p>
+          </div>
+
+          <!-- Liczba stron — tylko katalogi (informacja dla DTP i introligatorni) -->
+          <div class="field-group hidden" id="group-strony">
+            <label class="field-group__label" for="in-strony">Liczba stron (katalogu)</label>
+            <select id="in-strony" class="input">
+              <option value="8">8 stron</option>
+              <option value="12">12 stron</option>
+              <option value="16" selected>16 stron</option>
+              <option value="24">24 strony</option>
+              <option value="32">32 strony</option>
+              <option value="48">48 stron</option>
+              <option value="64">64 strony</option>
+            </select>
+            <p class="hint">Informacja dla introligatorni i DTP — cenę liczymy po arkuszach.</p>
+          </div>
+        </section>
+
+        <!-- KROK 2: uszlachetnienie -->
+        <section class="step" id="step-uszlachetnienie">
+          <header class="step__head">
+            <span class="step__num">2</span>
+            <h2 class="step__title">Uszlachetnienie i oprawa</h2>
+          </header>
+
+          <div class="chips" id="opt-usz">
+            <label class="chip"><input type="checkbox" name="usz" value="folia_mat" /><span>Foliowanie matowe</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="folia_poz" /><span>Foliowanie błyszczące</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="lakier_uv" /><span>Lakier apla</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="lakier_uv_wyb" /><span>Lakier UV wybiórczy</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="bigowanie" /><span>Bigowanie</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="perforacja" /><span>Perforacja</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="numeracja" /><span>Numeracja</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="wiercenie" /><span>Wiercenie</span></label>
+            <label class="chip"><input type="checkbox" name="usz" value="sztancowanie" /><span>Sztancowanie</span></label>
+          </div>
+
+          <div class="field-group hidden" id="group-oprawa">
+            <label class="field-group__label" for="in-oprawa">Oprawa (katalog)</label>
+            <select id="in-oprawa" class="input">
+              <option value="brak">Bez oprawy (luźne arkusze)</option>
+              <option value="zeszytowa" selected>Oprawa zeszytowa</option>
+              <option value="miekka">Oprawa miękka klejona</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- KROK 3: termin i dostawa -->
+        <section class="step" id="step-termin">
+          <header class="step__head">
+            <span class="step__num">3</span>
+            <h2 class="step__title">Termin i dostawa</h2>
+          </header>
+
+          <div class="field-group field-2col">
+            <div class="field-group">
+              <label class="field-group__label" for="in-termin">Termin realizacji</label>
+              <select id="in-termin" class="input">
+                <option value="standard">Standard (5–7 dni roboczych)</option>
+                <option value="ekspres">Ekspres (2–3 dni) — dopłata 35%</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-dostawa">Dostawa</label>
+              <select id="in-dostawa" class="input">
+                <option value="osobisty">Odbiór osobisty (Bagrowa 9, Kraków)</option>
+                <option value="kurier">Kurier DPD</option>
+                <option value="inpost">Paczkomat InPost (do 25 kg)</option>
+              </select>
+              <p class="hint">Koszt kuriera rośnie z wagą przesyłki — kwota odświeża się w liście wyboru.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- KROK 4: dane zamawiającego -->
+        <section class="step step--last" id="step-kontakt">
+          <header class="step__head">
+            <span class="step__num">4</span>
+            <h2 class="step__title">Dane zamawiającego</h2>
+          </header>
+
+          <div class="field-2col">
+            <div class="field-group">
+              <label class="field-group__label" for="in-name">Imię i nazwisko <small>(wymagane)</small></label>
+              <input type="text" id="in-name" class="input" autocomplete="name" placeholder="Jan Kowalski" required />
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-firma">Firma</label>
+              <input type="text" id="in-firma" class="input" autocomplete="organization" placeholder="Firma Sp. z o.o." />
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-email">E-mail <small>(wymagany)</small></label>
+              <input type="email" id="in-email" class="input" autocomplete="email" placeholder="jan@firma.pl" required />
+            </div>
+            <div class="field-group">
+              <label class="field-group__label" for="in-tel">Telefon</label>
+              <input type="tel" id="in-tel" class="input" autocomplete="tel" placeholder="600 000 000" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-group__label" for="in-uwagi">Uwagi dodatkowe</label>
+            <textarea id="in-uwagi" class="input" rows="3" placeholder="Termin, wzorniki, pliki do druku — dopisz, co ważne."></textarea>
+          </div>
+
+          <!-- [B11] Zgoda RODO — wymagana do wysłania wyceny -->
+          <label class="rodo" for="in-rodo">
+            <input type="checkbox" id="in-rodo" />
+            <span>Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przygotowania wyceny — zgodnie z RODO.</span>
+          </label>
+        </section>
+      </form>
+
+      <!-- ==================== PANEL WYCENY (sticky) ==================== -->
+      <aside class="summary" id="summary" aria-label="Podsumowanie wyceny">
+        <header class="summary__head">
+          <span class="summary__icon">zł</span>
+          <h2 class="summary__title">Wycena orientacyjna</h2>
+        </header>
+
+        <dl class="summary__rows" id="summary-rows">
+          <div><dt>Produkt</dt><dd id="sw-produkt">—</dd></div>
+          <div><dt>Arkusz</dt><dd id="sw-arkusz">B1+</dd></div>
+          <div><dt>Parametry</dt><dd id="sw-param">—</dd></div>
+          <div><dt>Nakład</dt><dd id="sw-naklad">—</dd></div>
+          <div><dt>Technologia</dt><dd id="sw-tech">—</dd></div>
+          <div><dt>Uszlachetnienie</dt><dd id="sw-usz">Brak</dd></div>
+          <div><dt>Termin</dt><dd id="sw-termin">Standard</dd></div>
+          <div><dt>Wysyłka</dt><dd id="sw-wysylka">—</dd></div>
+          <div><dt>Dostawa</dt><dd id="sw-dostawa">Odbiór osobisty</dd></div>
+          <div><dt>Waga przesyłki</dt><dd id="sw-waga">—</dd></div>
+        </dl>
+
+        <!-- [B8] Rozbicie wyceny na składniki (wymykalne) -->
+        <details class="summary__detale">
+          <summary>Rozbicie wyceny</summary>
+          <div class="summary__breakdown" id="summary-breakdown">
+            <div><span>Przygotowanie (CTP / maszyna)</span><strong id="sb-przygotowanie">0&nbsp;zł</strong></div>
+            <div id="row-pantone" class="hidden"><span>Formy Pantone</span><strong id="sb-pantone">0&nbsp;zł</strong></div>
+            <div><span>Druk (maszyna)</span><strong id="sb-druk">0&nbsp;zł</strong></div>
+            <div><span>Podłoże (papier/folia)</span><strong id="sb-papier">0&nbsp;zł</strong></div>
+            <div><span>Uszlachetnienie + oprawa</span><strong id="sb-usz">0&nbsp;zł</strong></div>
+            <div><span>Dostawa</span><strong id="sb-dostawa">0&nbsp;zł</strong></div>
+          </div>
+        </details>
+
+        <!-- [B9] Porównanie nakładów — pokazuje ekonomię skali -->
+        <div class="summary__porownanie">
+          <p class="summary__blockname">Porównanie nakładów</p>
+          <table class="porownanie">
+            <thead><tr><th>Arkusze</th><th>Netto</th><th>Za arkusz</th></tr></thead>
+            <tbody id="porownanie-body"><!-- wypełnia JS --></tbody>
+          </table>
+        </div>
+
+        <div class="summary__total">
+          <div class="summary__net">
+            <span>Netto</span><strong id="sum-netto">0 zł</strong>
+          </div>
+          <div class="summary__gross">
+            <span>Brutto (VAT 23%)</span><strong id="sum-brutto">0 zł</strong>
+          </div>
+          <p class="summary__unit">≈ <output id="sum-unit">0,00 zł</output> netto za arkusz</p>
+        </div>
+
+        <button type="button" class="btn btn--primary summary__btn" id="btn-send">Wyślij wycenę do handlowca</button>
+
+        <!-- [B10] Pobierz wycenę: wydruk / PDF i kopiowanie opisu -->
+        <div class="summary__pobierz">
+          <p class="summary__blockname">Pobierz wycenę</p>
+          <div class="summary__pobierz-btny">
+            <button type="button" class="btn btn--ghost btn--mini" id="btn-drukuj">Wydrukuj / PDF</button>
+            <button type="button" class="btn btn--ghost btn--mini" id="btn-kopiuj">Kopiuj opis</button>
+          </div>
+        </div>
+
+        <p class="summary__disclaimer">
+          Wycena orientacyjna, ważna 48 h — ostateczną cenę po weryfikacji
+          plików potwierdzi dział sprzedaży: <a href="mailto:mp@multigraf.com.pl">mp@multigraf.com.pl</a>
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- [A1] Mini-bar wyceny (mobile): suma zawsze pod ręką; chowa się, gdy panel wyceny na ekranie -->
+  <div class="minibar" id="minibar">
+    <div class="minibar__kwoty">
+      <strong id="minibar-netto">0 zł</strong>
+      <span id="minibar-brutto">brutto 0 zł</span>
+    </div>
+    <button type="button" class="btn btn--primary btn--mini" id="minibar-send">Wyślij wycenę</button>
+  </div>
+
+  <!-- ==================== STOPKA (footer) ==================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#home" class="footer__logo">
+        <span>M</span>ulti<span>G</span>raf<span class="footer__logo-dot">.com.pl</span>
+      </a>
+      <nav class="footer__nav" aria-label="Nawigacja w stopce">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#onas">O nas</a>
+        <a href="index.html#oferta">Oferta</a>
+        <a href="index.html#wsparcie">Wsparcie</a>
+        <a href="index.html#kariera">Kariera</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 Multigraf.com.pl • Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/wycena.js" defer></script>
+</body>
+</html>

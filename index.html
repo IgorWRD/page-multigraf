@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MultiGraf – Drukarnia offsetowa w Krakowie | Druk offsetowy, cyfrowy, wielkoformatowy</title>
+  <meta name="description" content="Drukarnia offsetowa Multigraf z Krakowa – od 1995 roku. Druk offsetowy do formatu B1+, druk cyfrowy, naświetlanie CTP, DTP, introligatornia i uszlachetnianie druków." />
+  <link rel="icon" href="img/favicon.png" />
+
+  <!-- Motyw zapisany w localStorage — przywróceny przed stylami, żeby nie było mignięcia -->
+  <script>
+    try {
+      document.documentElement.setAttribute('data-theme', window.localStorage.getItem('multigraf-motyw') || 'fairy');
+    } catch (blad) { /* brak localStorage — zostaje motyw domyślny »fairy» */ }
+  </script>
+
+  <!-- Czcionki: Playfair Display (nagłówki) + Inter (treść) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ==================== NAGŁÓWEK (header) ==================== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo" aria-label="MultiGraf – strona główna">
+        <img src="img/logo-multigraf.png" alt="MultiGraf – logo" class="logo__img" />
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Nawigacja główna">
+        <div class="nav__item">
+          <a href="#home" class="nav__link">Home</a>
+        </div>
+        <div class="nav__item">
+          <a href="#onas" class="nav__link">O nas</a>
+        </div>
+        <div class="nav__item">
+          <a href="#oferta" class="nav__link">Oferta</a>
+        </div>
+        <div class="nav__item">
+          <a href="#wsparcie" class="nav__link">Wsparcie</a>
+        </div>
+        <div class="nav__item">
+          <a href="#kariera" class="nav__link">Kariera</a>
+        </div>
+        <div class="nav__item">
+          <a href="#kontakt" class="nav__link">Kontakt</a>
+        </div>
+      </nav>
+
+      <!-- Przełącznik motywów kolorystycznych -->
+      <div class="theme-wrap">
+        <button id="motyw-przycisk" class="theme-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Wybierz motyw kolorystyczny">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.25" />
+            <path d="M12 2.75v18.5" />
+            <path d="M12 2.75c-3.5 2.6-3.5 6.5 0 9.25s3.5 6.65 0 9.25" />
+          </svg>
+        </button>
+        <div id="motyw-panel" class="theme-panel" role="menu" aria-label="Lista motywów" hidden></div>
+      </div>
+
+      <button class="burger" id="burger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Pionowy przycisk CTA przyklejony do prawej krawędzi — widoczny cały czas -->
+  <a href="wycena.html" class="cta-boczna" aria-label="Wyceń zamówienie — kalkulator wyceny">
+    Wyceń zamówienie
+  </a>
+
+  <main>
+    <!-- ==================== BANER / HOME ==================== -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero__content">
+          <span class="hero__eyebrow reveal">Drukarnia &middot; Kraków, ul. Bagrowa 9</span>
+          <h1 class="hero__title reveal">Drukarnia offsetowa<br /><em>od 1995 roku</em></h1>
+          <p class="hero__lead reveal">
+            Druk offsetowy do formatu B1+, druk cyfrowy, naświetlanie CTP, przygotowalnia DTP,
+            introligatornia i uszlachetnianie — wszystko pod jednym dachem.
+          </p>
+          <div class="hero__actions reveal">
+            <a href="wycena.html" class="btn btn--primary">Wyceń zamówienie</a>
+            <a href="#oferta" class="btn btn--ghost">Zobacz ofertę</a>
+          </div>
+
+          <ul class="hero__stats reveal">
+            <li><strong>1995</strong><span>rok założenia</span></li>
+            <li><strong>B1+</strong><span>maks. format druku offsetowego</span></li>
+            <li><strong>80–450 g</strong><span>gramatury podłoży</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== OFERTA ==================== -->
+    <section class="section" id="oferta">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__eyebrow">Oferta</span>
+          <h2 class="section__title">W naszej ofercie</h2>
+        </header>
+
+        <div class="grid-3">
+          <article class="offer-card reveal">
+            <img src="img/maszyna-offset-man-roland-700.jpg" loading="lazy" alt="Maszyna offsetowa Man Roland 700" />
+            <div class="offer-card__body">
+              <h3 class="card__title">Druk offsetowy</h3>
+              <p class="card__text">
+                Drukujemy na podłożach powlekanych i niepowlekanych, na kartonach
+                i podłożach niewsiąkliwych, na gramaturach 80–450&nbsp;g/m².
+              </p>
+            </div>
+          </article>
+
+          <article class="offer-card reveal">
+            <img src="img/konica-minolta-c6500-pro.jpg" loading="lazy" alt="Konica Minolta C6500 Pro" />
+            <div class="offer-card__body">
+              <h3 class="card__title">Druk cyfrowy</h3>
+              <p class="card__text">
+                Dla niskich nakładów oferujemy druk cyfrowy. Wykonamy nawet 1 sztukę
+                czy egzemplarz prac prostych, jak i złożonych.
+              </p>
+            </div>
+          </article>
+
+          <article class="offer-card reveal">
+            <img src="img/ctp.jpg" loading="lazy" alt="Naświetlarka CTP" />
+            <div class="offer-card__body">
+              <h3 class="card__title">…oraz wiele innych</h3>
+              <p class="card__text">
+                Naświetlanie CTP, druk offsetowy od niskich nakładów, przygotowanie
+                do druku i DTP… Zapraszamy do współpracy!
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Plakaty B1 – pasek (jak podstrona na stronie głównej) -->
+        <div class="b1-banner reveal" id="plakaty-b1">
+          <div>
+            <h3 class="b1-banner__title">Plakaty do formatu B1+</h3>
+            <p class="b1-banner__text">Druk plakatów do formatu B1+ (720×1020 netto) — wysoka jakość, atrakcyjne nakłady. Szczegóły wyceny u działu sprzedaży.</p>
+          </div>
+          <a href="wycena.html" class="btn btn--ghost">Zapytaj o wycenę</a>
+        </div>
+
+        <!-- Pełna lista usług (jak na oryginalnej stronie) -->
+        <ul class="offer-list reveal" id="oferta-lista">
+          <li>– projekty graficzne, przygotowanie do druku i DTP</li>
+          <li>– naświetlanie płyt CTP (1030×785)</li>
+          <li>– druk offsetowy do formatu B1+</li>
+          <li>– druk cyfrowy tonerowy do formatu 330&times;487 mm</li>
+          <li>– personalizacje druków</li>
+          <li>– oprawa zeszytowa</li>
+          <li>– oprawa miękka klejona</li>
+          <li>– falcowanie, bigowanie, rycowanie</li>
+          <li>– klejenie, wiercenie</li>
+          <li>– listwowanie</li>
+          <li>– sztancowanie do formatu B1</li>
+          <li>– kaszerowanie do formatu B1</li>
+          <li>– uszlachetnianie druków</li>
+          <li>– foliowanie folią błyszczącą, matową oraz foliami specjalnymi, lakierowanie offsetowe, UV płaszczyznowe oraz UV wybiórcze</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== O NAS ==================== -->
+    <section class="section section--alt" id="onas">
+      <div class="container about">
+        <div class="about__text reveal">
+          <span class="section__eyebrow">O nas</span>
+          <h2 class="section__title">Drukarnia, która zna technologię od podstaw</h2>
+          <p>
+            Drukarnia offsetowa Multigraf istnieje od 1995 roku. Założona została
+            jako Drukarnia Borgis i pod tą nazwą funkcjonowała do roku 2001.
+            Pierwotną lokalizacją drukarni była hala przy ul. Fabrycznej w Krakowie,
+            następnie mieściła się w zabytkowych budynkach przy ul. Stanisława
+            Żółkiewskiego, obecnie działamy na ul. Bagrowej 9.
+          </p>
+          <p>
+            Drukarnia Multigraf jest firmą poligraficzną oferującą usługi z zakresu
+            druku offsetowego, cyfrowego jak i wielkoformatowego. Dysponujemy własną
+            przygotowalnią poligraficzną, studiem DTP, uszlachetnianiem
+            oraz introligatornią. Kooperujemy z szeregiem firm z branży poligraficznej,
+            zatem kompleksowe wykonanie dowolnego pomysłu jest w naszym zasięgu.
+          </p>
+        </div>
+        <div class="about__media reveal">
+          <img src="img/multigraf-home.png" loading="lazy" alt="MultiGraf – strona główna firmy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== WSPARCIE (PFR) ==================== -->
+    <section class="section" id="wsparcie">
+      <div class="container support">
+        <div class="support__media reveal">
+          <img src="img/plansza-pfr.jpg" loading="lazy" alt="Plansza informacyjna – Polska Fundacja Rozwoju (PFR)" />
+        </div>
+        <div class="support__text reveal">
+          <span class="section__eyebrow">Wsparcie</span>
+          <h2 class="section__title">Inwestujemy w rozwój</h2>
+          <p>
+            Przedsiębiorca uzyskał subwencję finansową w ramach programu
+            <em>„Polskiego Przemysłu i Rozwoju dla Mikro, Małych i Średnich Firm”</em>,
+            udzieloną przez <strong>PFR S.A.</strong> — Polska Fundacja Rozwoju.
+          </p>
+          <p class="support__note">
+            Środki przeznaczamy na rozwój parku maszynowego i podnoszenie jakości usług dla naszych klientów.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== KONTAKT ==================== -->
+    <section class="section section--alt" id="kontakt">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__eyebrow">Kontakt</span>
+          <h2 class="section__title">Porozmawiajmy o Twoim projekcie</h2>
+        </header>
+
+        <div class="contact">
+          <form class="form reveal" id="contact-form" novalidate>
+            <div class="form__row">
+              <div class="form__field">
+                <label for="f-name">Imię i nazwisko <small>(wymagane)</small></label>
+                <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Jan Kowalski" />
+              </div>
+              <div class="form__field">
+                <label for="f-email">Twój email <small>(wymagane)</small></label>
+                <input type="email" id="f-email" name="email" required autocomplete="email" placeholder="jan@firma.pl" />
+              </div>
+            </div>
+
+            <div class="form__field">
+              <label for="f-topic">Temat</label>
+              <input type="text" id="f-topic" name="topic" placeholder="Wycena — katalog 64 strony" />
+            </div>
+
+            <div class="form__field">
+              <label for="f-msg">Treść wiadomości</label>
+              <textarea id="f-msg" name="message" rows="6" placeholder="Nakład, format, rodzaj papieru, termin..."></textarea>
+            </div>
+
+            <p class="form__status" id="form-status" role="status"></p>
+            <button type="submit" class="btn btn--primary form__submit">Wyślij</button>
+          </form>
+
+          <aside class="contact__info reveal">
+            <h3>Dział sprzedaży</h3>
+            <p><strong>Maciej Ptasiński</strong></p>
+            <p>tel. <a href="tel:+48607686778">607 686 778</a></p>
+            <p>mail: <a href="mailto:mp@multigraf.com.pl">mp@multigraf.com.pl</a></p>
+
+            <h3>Dział DTP</h3>
+            <p>mail: <a href="mailto:dtp@multigraf.com.pl">dtp@multigraf.com.pl</a></p>
+
+            <h3>Kierownictwo produkcji</h3>
+            <p><strong>Paweł Pietrzyk</strong></p>
+            <p>tel. <a href="tel:+48607686684">607 686 684</a></p>
+            <p>mail: <a href="mailto:pp@multigraf.com.pl">pp@multigraf.com.pl</a></p>
+
+            <h3>Adres</h3>
+            <p>ul. Bagrowa 9, Kraków 30-733</p>
+            <p>tel.: <a href="tel:+48124293004">12 429 30 04</a></p>
+            <p>mail: <a href="mailto:biuro@multigraf.com.pl">biuro@multigraf.com.pl</a></p>
+
+            <p class="contact__hours">Firma działa od poniedziałku do piątku w godzinach 8:00–16:00.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== KARIERA ==================== -->
+    <section class="section" id="kariera">
+      <div class="container">
+        <div class="career reveal">
+          <span class="section__eyebrow">Kariera</span>
+          <h2 class="section__title">Dołącz do zespołu</h2>
+          <p>
+            Szukamy ludzi z pasją do poligrafii — operatorów maszyn, techników DTP
+            i osób handlowych. Nie ma aktualnie pasującego stanowiska?
+            Nic nie szkodzi — wyślij nam swoje CV na poniższy adres.
+          </p>
+          <a href="mailto:biuro@multigraf.com.pl?subject=Kariera" class="btn btn--primary">Wyślij CV</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== STOPKA (footer) ==================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">
+        <span>M</span>ulti<span>G</span>raf<span class="footer__logo-dot">.com.pl</span>
+      </div>
+      <nav class="footer__nav" aria-label="Nawigacja w stopce">
+        <a href="#home">Home</a>
+        <a href="#onas">O nas</a>
+        <a href="#oferta">Oferta</a>
+        <a href="#wsparcie">Wsparcie</a>
+        <a href="#kariera">Kariera</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 Multigraf.com.pl • Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
