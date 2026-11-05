@@ -1,9 +1,50 @@
-# MultiGraf — strona drukarni
+# MultiGraf — нова версія сайту
 
-Statyczna strona drukarni MultiGraf (Kraków) z kalkulatorem wyceny druku offsetowego (formaty arkuszy do B1+).
+Матеріали підготовлені 4 листопада 2026 року на основі read-only аудиту папки `_info/`.
+Жоден файл у `_info/` не змінено.
 
-- index.html — strona główna
-- wycena.html — kalkulator wyceny (czysty JavaScript, bez build)
-- css/, js/, img/ — style, skrypty i grafika
+## Що тут є
 
-Publikacja: GitHub Pages z katalogu głównego (gałąź main, folder /).
+| Файл | Призначення |
+|---|---|
+| [`koncepcje/index.html`](koncepcje/index.html) | **Стартова точка:** порівняння чотирьох концепцій головної сторінки (польською) |
+| [`koncepcje/a-arkusz.html`](koncepcje/a-arkusz.html) | Концепція A «Arkusz» — папір, фарба, брендова синя |
+| [`koncepcje/b-warsztat.html`](koncepcje/b-warsztat.html) | Концепція B «Warsztat» — графіт, сигнальний жовтий, технічні таблиці |
+| [`koncepcje/c-archiwum.html`](koncepcje/c-archiwum.html) | Концепція C «Archiwum» — газетний папір, антиква, історія |
+| [`koncepcje/d-plakat.html`](koncepcje/d-plakat.html) | Концепція D «Plakat» — білий лист, чорні контури, CMYK-поля, гучний постер |
+| [`koncepcje/obecna/index.html`](koncepcje/obecna/index.html) | Копія поточної сторінки 1:1 (варіант «як є») разом із калькулятором — для повного пакета |
+| [`dokumenty/pytania-strona-i-kalkulator.md`](dokumenty/pytania-strona-i-kalkulator.md) | **Питання після аудиту:** 60 питань у двох блоках (сайт / калькулятор), з місцем для відповідей — файл для заповнення |
+| [`dokumenty/pytania-strona-i-kalkulator.pdf`](dokumenty/pytania-strona-i-kalkulator.pdf) | Той самий список для друку: 5 сторінок A4, польською |
+| [`00-przeglad.md`](00-przeglad.md) | Повний аудит поточної версії: P0/P1/P2, файли, доступність, SEO, продуктивність, калькулятор, контент |
+| [`01-kierunek-designu.md`](01-kierunek-designu.md) | Дизайн-критика та напрями візуальної ідентичності; рекомендований напрям «Arkusz» |
+| [`02-plan-dzialan.md`](02-plan-dzialan.md) | Поетапний план робіт, оцінки, критерії приймання, ризики |
+
+## Як переглянути
+
+Відкрийте [`koncepcje/index.html`](koncepcje/index.html) через локальний статичний сервер — так коректно завантажуються локальні шрифти:
+
+```bash
+# з кореня проєкту
+cd new-version
+python -m http.server 4180
+```
+
+Далі: `http://127.0.0.1:4180/koncepcje/` (або просто відкрийте `new-version/index.html` — він перекидає на огляд).
+
+Для передачі клієнту достатньо скопіювати всю папку `new-version/` на флешку: огляд, чотири концепції, копія поточної сторінки, спільні ресурси й анкета лежать усередині. Сторінка порівняння має посилання на варіант «як є» — `koncepcje/obecna/index.html`.
+
+Концепції зібрані на однаковому польському контенті. Форми демонстраційні й не надсилають даних. Блок PFR, ціни калькулятора й юридичні тексти свідомо не вигадані — їх потрібно підтвердити перед виробничою версією.
+
+## Коротко
+
+Сайт має хорошу технічну базу (локальні шрифти, семантика, print-стилі калькулятора, продумана логіка ціноутворення), але **в поточному вигляді його не можна публікувати**:
+
+1. Форма контакту нікуди не надсилає дані (`main.js:76–79`).
+2. Калькулятор відправляє `mailto:` з демонстраційними цінами; частина логіки дає неправильні результати.
+3. Немає політики приватності та юридичних даних, хоча форма збирає персональні дані.
+4. Усі canonical/OG/schema/sitemap URL ведуть на демо-домен `igorwrd.github.io`.
+5. Контраст і мобільна верстка не проходять WCAG AA: 6 із 8 тем мають критичні пари нижче 4.5:1, логотип у темних темах майже невидимий.
+6. Контент містить фактичні помилки (PFR, 80–450 г проти 80–300 г у калькуляторі, B1+ проти B1, формат цифрового друку).
+7. Головне зображення hero — 750×500 px на весь екран; фото «Про нас» — кадр із Google Street View із бур'яном.
+
+Деталі, точні посилання на рядки та вимірювання — у [`00-przeglad.md`](00-przeglad.md).
